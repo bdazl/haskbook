@@ -3,9 +3,12 @@
 build:
 	stack build
 
+build-quiet:
+	stack build --verbosity 0
+
 # Run the last thing worked on
-run:
-	stack exec -- haskbook-exe latest
+run: build-quiet
+	stack exec --verbosity 0 -- haskbook-exe latest
 
 test:
 	stack test
