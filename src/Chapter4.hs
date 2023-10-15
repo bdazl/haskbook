@@ -15,10 +15,14 @@ intdata = [1..10]
 mty :: [Int]
 mty = []
 
+skip :: String
+skip = "skip"
+
 sol :: [String]
 sol = [
         show (halve intdata),
-        show (third intdata == third' intdata && third' intdata == third'' intdata),
+        show (third intdata == third' intdata &&
+              third intdata == third'' intdata),
         show (safetail mty == safetail' mty &&
               safetail mty == safetail'' mty &&
               safetail intdata == safetail' intdata &&
@@ -28,11 +32,14 @@ sol = [
               or''' True True &&
               not (or' False False) &&
               not (or'' False False) &&
-              not (or''' False False))
+              not (or''' False False)),
+        skip,
+        skip,
+        "(\\x -> (\\y -> (\\z -> x*y*z) )) 2 3 4 = " ++ show (mult' 2 3 4)
       ]
 
-sol2 :: String
-sol2 = show (third [1, 2, 3, 4, 5])
+mult' :: Int -> Int -> Int -> Int
+mult' = \x -> (\y -> (\z -> x*y*z) )
 
 halve :: [a] -> ([a], [a])
 halve xs = (take hlen xs, drop hlen xs) where
